@@ -6,7 +6,7 @@ import {Technologies} from "./components/Technologies";
 const App = () => {
   return (
       <div>
-        <Header/>
+        <Header title={"Hello, samurai! Let's go!"}/>
         <Technologies />
       </div>
 )
