@@ -1,0 +1,15 @@
+
+
+.nav{
+    grid-area: n;
+    background-color: burlywood;
+}
+
+div a{
+    text-decoration: none;
+    color: white;
+}
+
+.item{
+
+}

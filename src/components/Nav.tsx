@@ -1,8 +1,11 @@
 import React from "react";
+import classes from "./Nav.module.css"
+
 export const Nav = () => {
     return(
-    <nav className='nav'>
+    <nav className={classes.nav}>
         <div>
+        <div className={classes.item}>
             <a href='#'>Profile</a>
         </div>
         <div>
@@ -16,6 +19,7 @@ export const Nav = () => {
         </div>
         <div>
             <a href='#'>Settings</a>
+        </div>
         </div>
     </nav>
     )
