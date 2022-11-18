@@ -1,11 +1,11 @@
 import React from "react";
-import classes from "./Nav.module.css"
+import s from "./Nav.module.css"
 
 export const Nav = () => {
     return(
-    <nav className={classes.nav}>
+    <nav className={s.nav}>
         <div>
-        <div className={classes.item}>
+        <div className={s.item}>
             <a href='src/components/Nav/Nav#'>Profile</a>
         </div>
         <div>
