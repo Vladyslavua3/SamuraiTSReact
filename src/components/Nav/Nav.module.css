@@ -10,6 +10,6 @@ div a{
     color: white;
 }
 
-.item{
-
+div a.activeLink{
+  color: gold;
 }
