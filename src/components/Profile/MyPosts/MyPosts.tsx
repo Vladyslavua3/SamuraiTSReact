@@ -1,18 +1,38 @@
 import React from "react";
 
-import p from "./MyPosts.module.css"
+import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 
 
 
 export const MyPosts = () => {
+
+    const postData = [
+        {
+            id:1,
+            post:'Holla',
+            likeCount:5,
+            photo: 'https://static01.nyt.com/images/2022/09/16/arts/16CAMERON1/16CAMERON1-mediumSquareAt3X.jpg'
+        },
+        {
+            id:2,
+            post:'Shalom',
+            likeCount:10,
+            photo: 'https://hips.hearstapps.com/wdy.h-cdn.co/assets/17/39/cola-0247.jpg'
+        }
+    ]
+
+
     return (
-        <div>
-            <div>My Posts</div>
-            <div>New Post</div>
-            <div className={p.posts}>
-                <Post post={'post1'} likeCount={5} img={'https://static01.nyt.com/images/2022/09/16/arts/16CAMERON1/16CAMERON1-mediumSquareAt3X.jpg'}/>
-                <Post post={'post2'} likeCount={10} img={'https://hips.hearstapps.com/wdy.h-cdn.co/assets/17/39/cola-0247.jpg'}/>
+        <div className={s.posts}>
+            <h2>My Posts</h2>
+            <div>
+                <textarea></textarea>
+            </div>
+            <button>Add Post</button>
+            <div>
+                <Post post={postData[0].post} likeCount={postData[0].likeCount} img={postData[0].photo}/>
+                <Post post={postData[1].post} likeCount={postData[1].likeCount} img={postData[1].photo}/>
             </div>
         </div>
 

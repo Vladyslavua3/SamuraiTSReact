@@ -3,6 +3,7 @@ import React from "react";
 import p from "./Post.module.css"
 
 type PostProps = {
+    id?:number
     img:string
     post:string
     likeCount:number
