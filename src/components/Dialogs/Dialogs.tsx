@@ -1,6 +1,6 @@
 import s from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
-import {message} from "antd";
+;
 
 type DialogItemProps = {
     id:string
@@ -8,7 +8,7 @@ type DialogItemProps = {
 }
 
 
-const DialogfItem = (props:DialogItemProps) => {
+const DialogItem = (props:DialogItemProps) => {
     return(
         <div className={s.dialog}>
             <NavLink to={'/dialogs/' + props.id}>{props.name}</NavLink>
@@ -54,6 +54,9 @@ export const Dialogs = () => {
 
     ]
 
+    let dialogsElement = DialogsArr.map(el => <DialogItem id={el.id} name={el.name}/>)
+
+
     const MessageArr:Array<MessageItemProps> = [
         {
             id: 1,
@@ -73,19 +76,17 @@ export const Dialogs = () => {
         }
     ]
 
+    let messageElement = MessageArr.map(el => <Message message={el.message} id={el.id}/>)
+
+
 
 return(
     <div className={s.dialogs}>
         <div className={s.dialogsItems}>
-            <DialogfItem id={'1'} name={'Nastya'}/>
-            <DialogfItem id={'2'} name={'Vladlen'} />
-            <DialogfItem id={'3'} name={'Anastas'} />
-            <DialogfItem id={'4'} name={'Vladik'} />
+            {dialogsElement}
         </div>
         <div className={s.messages}>
-            <Message message={MessageArr[0].message} id={MessageArr[0].id}/>
-            <Message message={MessageArr[3].message} id={MessageArr[3].id}/>
-            <Message message={'Good'} id={3}/>
+            {messageElement}
         </div>
     </div>
 )

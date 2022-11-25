@@ -6,14 +6,13 @@
 
 .dialogs-items{
   padding: 10px;
+    color: cornflowerblue;
 }
 
-.dialogs-items .active{
-    color: gold;
-}
 
-.dialog{
 
+dialog{
+color: cornflowerblue;
 }
 
 .messages{

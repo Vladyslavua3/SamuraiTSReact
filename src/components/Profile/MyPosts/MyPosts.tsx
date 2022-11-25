@@ -22,6 +22,8 @@ export const MyPosts = () => {
         }
     ]
 
+  let postsItem = postData.map(el => <Post img={el.photo} post={el.post} likeCount={el.likeCount}/>)
+
 
     return (
         <div className={s.posts}>
@@ -31,8 +33,7 @@ export const MyPosts = () => {
             </div>
             <button>Add Post</button>
             <div>
-                <Post post={postData[0].post} likeCount={postData[0].likeCount} img={postData[0].photo}/>
-                <Post post={postData[1].post} likeCount={postData[1].likeCount} img={postData[1].photo}/>
+                {postsItem}
             </div>
         </div>
 
