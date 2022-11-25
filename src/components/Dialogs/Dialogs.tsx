@@ -1,14 +1,8 @@
 import s from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
-;
+import {dialogsType,messageType,dialogsPageType,messagesType} from "../../State";
 
-type DialogItemProps = {
-    id:string
-    name:string
-}
-
-
-const DialogItem = (props:DialogItemProps) => {
+const DialogItem = (props:dialogsType) => {
     return(
         <div className={s.dialog}>
             <NavLink to={'/dialogs/' + props.id}>{props.name}</NavLink>
@@ -16,13 +10,9 @@ const DialogItem = (props:DialogItemProps) => {
     )
 }
 
-type MessageItemProps = {
-    message:string
-    id:number
-}
 
 
-const Message = (props:MessageItemProps) => {
+const Message = (props:messageType) => {
     return(
         <div className={s.message}>
             {props.message}
@@ -30,53 +20,22 @@ const Message = (props:MessageItemProps) => {
     )
 }
 
+type DialogsProps = {
+    dialogs:dialogsPageType
+    messages:messagesType
+}
 
 
-export const Dialogs = () => {
-
-    const DialogsArr:Array<DialogItemProps> = [
-        {
-            id: '1',
-            name:'Nastya'
-        },
-        {
-            id: '2',
-            name:'Vladlen'
-        },
-        {
-            id: '3',
-            name:'Anastas'
-        },
-        {
-            id: '4',
-            name:'Vladik'
-        },
-
-    ]
-
-    let dialogsElement = DialogsArr.map(el => <DialogItem id={el.id} name={el.name}/>)
+export const Dialogs = (props:DialogsProps) => {
 
 
-    const MessageArr:Array<MessageItemProps> = [
-        {
-            id: 1,
-            message: 'Hi'
-        },
-        {
-            id: 2,
-            message: 'How are you'
-        },
-        {
-            id: 3,
-            message: 'Holla'
-        },
-        {
-            id: 4,
-            message: 'Whatsuuuuup?'
-        }
-    ]
+    let dialogs = props.dialogs.dialogsArr
 
-    let messageElement = MessageArr.map(el => <Message message={el.message} id={el.id}/>)
+    let dialogsElement = dialogs.map(el => <DialogItem id={el.id} name={el.name}/>)
+
+    let messages = props.messages.message
+
+    let messageElement = messages.map(el => <Message message={el.message} id={el.id}/>)
 
 
 
