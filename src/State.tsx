@@ -24,16 +24,12 @@ export type profilePageType = {
 
 export type messagesType = {
     message: Array<messageType>
-}
-
-export type dialogsPageType = {
-    dialogsArr: Array<dialogsType>
+    dialogs:Array<dialogsType>
 }
 
 export type stateType = {
     profilePage: profilePageType
     messages: messagesType
-    dialogsPage: dialogsPageType
 }
 export let state: stateType = {
     profilePage: {
@@ -70,10 +66,8 @@ export let state: stateType = {
                 id: 4,
                 message: 'Whatsuuuuup?'
             }
-        ]
-    },
-    dialogsPage: {
-        dialogsArr: [
+        ],
+        dialogs: [
             {
                 id: '1',
                 name: 'Nastya'

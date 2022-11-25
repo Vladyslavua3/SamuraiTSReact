@@ -1,6 +1,6 @@
 import s from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
-import {dialogsType,messageType,dialogsPageType,messagesType} from "../../State";
+import {dialogsType,messageType,messagesType} from "../../State";
 
 const DialogItem = (props:dialogsType) => {
     return(
@@ -21,7 +21,6 @@ const Message = (props:messageType) => {
 }
 
 type DialogsProps = {
-    dialogs:dialogsPageType
     messages:messagesType
 }
 
@@ -29,7 +28,7 @@ type DialogsProps = {
 export const Dialogs = (props:DialogsProps) => {
 
 
-    let dialogs = props.dialogs.dialogsArr
+    let dialogs = props.messages.dialogs
 
     let dialogsElement = dialogs.map(el => <DialogItem id={el.id} name={el.name}/>)
 
