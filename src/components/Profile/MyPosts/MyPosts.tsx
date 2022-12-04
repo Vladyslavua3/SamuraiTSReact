@@ -11,18 +11,25 @@ type myPostsProps = {
 export const MyPosts = (props:myPostsProps) => {
 
 
-   let postData = props.posts
+  let postsItem = props.posts.map(el => <Post img={el.photo} post={el.post} likeCount={el.likeCount}/>)
 
-  let postsItem = postData.map(el => <Post img={el.photo} post={el.post} likeCount={el.likeCount}/>)
 
+    let newPostElement = React.createRef<HTMLTextAreaElement>()
+
+    const addPost = () => {
+       if(newPostElement.current){
+           let text = newPostElement.current.value
+           alert(text)
+       }
+    }
 
     return (
         <div className={s.posts}>
             <h2>My Posts</h2>
             <div>
-                <textarea></textarea>
+                <textarea ref={newPostElement}></textarea>
             </div>
-            <button>Add Post</button>
+            <button onClick={addPost}>Add Post</button>
             <div>
                 {postsItem}
             </div>

@@ -1,6 +1,7 @@
 import s from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
 import {dialogsType,messageType,messagesType} from "../../State";
+import {createRef} from "react";
 
 const DialogItem = (props:dialogsType) => {
     return(
@@ -36,6 +37,14 @@ export const Dialogs = (props:DialogsProps) => {
 
     let messageElement = messages.map(el => <Message message={el.message} id={el.id}/>)
 
+    const newMessage = createRef<HTMLTextAreaElement>()
+
+    let addMessage = () => {
+        if(newMessage.current){
+            let message = newMessage.current.value
+            alert(message)
+        }
+    }
 
 
 return(
@@ -46,6 +55,8 @@ return(
         <div className={s.messages}>
             {messageElement}
         </div>
+        <textarea ref={newMessage}></textarea>
+        <button onClick={addMessage}>Send Message</button>
     </div>
 )
 }
