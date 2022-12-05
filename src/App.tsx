@@ -13,6 +13,7 @@ import {stateType} from "./State";
 
 type AppProps = {
     state: stateType
+    addPost:(postMessage:string) => void
 }
 
 
@@ -26,7 +27,7 @@ const App = (props: AppProps) => {
                     <Routes>
                         <Route path='/dialogs'
                                element={<Dialogs messages={props.state.messages}/>}/>
-                        <Route path='/profile' element={<Profile profilePage={props.state.profilePage}/>}/>
+                        <Route path='/profile' element={<Profile profilePage={props.state.profilePage} addPost={props.addPost}/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/settings' element={<Settings/>}/>
