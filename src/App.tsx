@@ -8,12 +8,13 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {stateType} from "./State";
+import {stateType, updateNewPostText} from "./State";
 
 
 type AppProps = {
     state: stateType
-    addPost:(postMessage:string) => void
+    addPost:() => void
+    updateNewPostText:(newText:string) => void
 }
 
 
@@ -27,7 +28,7 @@ const App = (props: AppProps) => {
                     <Routes>
                         <Route path='/dialogs'
                                element={<Dialogs messages={props.state.messages}/>}/>
-                        <Route path='/profile' element={<Profile profilePage={props.state.profilePage} addPost={props.addPost}/>}/>
+                        <Route path='/profile' element={<Profile profilePage={props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/settings' element={<Settings/>}/>

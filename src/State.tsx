@@ -20,6 +20,7 @@ export type messageType = {
 }
 
 export type profilePageType = {
+    newPostText:string
     postData: Array<postDataType>
 }
 
@@ -34,6 +35,7 @@ export type stateType = {
 }
 export let state: stateType = {
     profilePage: {
+        newPostText:'LOL',
         postData: [
             {
                 id: 1,
@@ -90,13 +92,17 @@ export let state: stateType = {
     }
 }
 
-export const addPost = (postMessage:string) => {
+export const addPost = () => {
     const newPost:postDataType = {
         id:state.profilePage.postData.length + 1,
-        post:postMessage,
+        post:state.profilePage.newPostText,
         likeCount:0,
         photo:''
     }
     state.profilePage.postData.push(newPost);
+    rerenderEntireTree(state);
+}
+export const updateNewPostText = (newText:string) => {
+    state.profilePage.newPostText = newText;
     rerenderEntireTree(state);
 }

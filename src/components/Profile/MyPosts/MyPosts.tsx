@@ -1,30 +1,39 @@
 import React from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {postDataType} from "../../../State";
+import {postDataType, profilePageType} from "../../../State";
 
 type myPostsProps = {
-    posts:Array<postDataType>
-    addPost:(postMessage:string)=>void
+    profilePage:profilePageType
+    addPost:()=>void
+    newPostText:string
+    updateNewPostText:(newText:string) => void
 }
 
 export const MyPosts = (props:myPostsProps) => {
 
-    let postsItem = props.posts.map(el => <Post img={el.photo} post={el.post} likeCount={el.likeCount}/>)
+    let postsItem = props.profilePage.postData.map(el => <Post img={el.photo} post={el.post} likeCount={el.likeCount}/>)
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-           if(newPostElement.current){
-               props.addPost(newPostElement.current.value)
-           }
-       }
+        props.addPost()
+        props.updateNewPostText('')
+
+    }
+
+    const onPostChange = () => {
+        if (newPostElement.current) {
+            props.updateNewPostText(newPostElement.current.value)
+        }
+    }
+
 
     return (
         <div className={s.posts}>
             <h2>My Posts</h2>
             <div>
-                <textarea ref={newPostElement}></textarea>
+                <textarea ref={newPostElement} onChange={onPostChange} value={props.newPostText}/>
             </div>
             <button onClick={addPost}>Add Post</button>
             <div>
