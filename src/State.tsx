@@ -1,5 +1,7 @@
 
-import {rerenderEntireTree} from "./render";
+let rerenderEntireTree = () => {
+ console.log('change')
+}
 
 
 export type dialogsType = {
@@ -100,9 +102,13 @@ export const addPost = () => {
         photo:''
     }
     state.profilePage.postData.push(newPost);
-    rerenderEntireTree(state);
+    rerenderEntireTree();
 }
 export const updateNewPostText = (newText:string) => {
     state.profilePage.newPostText = newText;
-    rerenderEntireTree(state);
+    rerenderEntireTree();
+}
+
+export const subscribe = (callback:() => void ) => {
+    rerenderEntireTree = callback
 }
