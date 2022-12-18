@@ -12,7 +12,7 @@ type myPostsProps = {
 
 export const MyPosts = (props:myPostsProps) => {
 
-    let postsItem = props.profilePage.postData.map(el => <Post img={el.photo} post={el.post} likeCount={el.likeCount}/>)
+    let postsItem = props.profilePage.postData.map(el => <Post id={el.id} img={el.photo} post={el.post} likeCount={el.likeCount}/>)
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 

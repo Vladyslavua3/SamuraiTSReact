@@ -8,17 +8,18 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {stateType, updateNewPostText} from "./State";
+import { StoreType} from "./State";
 
 
 type AppProps = {
-    state: stateType
-    addPost:() => void
-    updateNewPostText:(newText:string) => void
+    store: StoreType
 }
 
 
 const App = (props: AppProps) => {
+    const state = props.store.getState()
+
+
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
@@ -27,8 +28,8 @@ const App = (props: AppProps) => {
                 <div className='app-wrapper-content'>
                     <Routes>
                         <Route path='/dialogs'
-                               element={<Dialogs messages={props.state.messages}/>}/>
-                        <Route path='/profile' element={<Profile profilePage={props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>}/>
+                               element={<Dialogs messages={state.messages}/>}/>
+                        <Route path='/profile' element={<Profile profilePage={state.profilePage} addPost={props.store.addPost.bind(props.store)} updateNewPostText={props.store.updateNewPostText.bind(props.store)}/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/settings' element={<Settings/>}/>

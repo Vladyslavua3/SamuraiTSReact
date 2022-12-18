@@ -13,7 +13,7 @@ type PostProps = {
 export const Post = (props:PostProps) => {
     return (
         <div>
-            <div className={p.item}>
+            <div className={p.item} key={props.id}>
                 <img src={props.img}/>
                 {props.post}
                <div>{props.likeCount}</div>
