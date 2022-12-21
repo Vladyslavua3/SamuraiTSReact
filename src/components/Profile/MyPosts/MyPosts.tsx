@@ -1,13 +1,12 @@
 import React from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {postDataType, profilePageType} from "../../../State";
+import {addPostACType, postDataType, profilePageType, UpdatePostACType} from "../../../State";
 
 type myPostsProps = {
     profilePage:profilePageType
-    addPost:()=>void
     newPostText:string
-    updateNewPostText:(newText:string) => void
+    dispatch: (action:addPostACType | UpdatePostACType ) => void
 }
 
 export const MyPosts = (props:myPostsProps) => {
@@ -17,14 +16,13 @@ export const MyPosts = (props:myPostsProps) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-        props.addPost()
-        props.updateNewPostText('')
-
+        props.dispatch({type:'ADD-POST'})
+        props.dispatch({type:'UPDATE-NEW-POST-TEXT',newText:''})
     }
 
     const onPostChange = () => {
         if (newPostElement.current) {
-            props.updateNewPostText(newPostElement.current.value)
+            props.dispatch({type:'UPDATE-NEW-POST-TEXT',newText:newPostElement.current.value})
         }
     }
 

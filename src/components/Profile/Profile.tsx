@@ -3,13 +3,12 @@ import React from "react";
 import s from "./Profile.module.css"
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {profilePageType} from "../../State";
+import {addPostACType, profilePageType, UpdatePostACType} from "../../State";
 
 
 type profileProps = {
     profilePage:profilePageType
-    addPost:() =>void
-    updateNewPostText:(newText:string) => void
+    dispatch: (action:addPostACType | UpdatePostACType ) => void
 }
 
 
@@ -20,8 +19,7 @@ export const Profile = (props:profileProps) => {
             <MyPosts
                 profilePage={props.profilePage}
                 newPostText={props.profilePage.newPostText}
-                addPost={props.addPost}
-                updateNewPostText={props.updateNewPostText}
+                dispatch={props.dispatch}
             />
         </div>
     )
