@@ -3,12 +3,12 @@ import React from "react";
 import s from "./Profile.module.css"
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {addPostACType, profilePageType, UpdatePostACType} from "../../State";
+import {ActionsType, profilePageType} from "../../State";
 
 
 type profileProps = {
     profilePage:profilePageType
-    dispatch: (action:addPostACType | UpdatePostACType ) => void
+    dispatch: (action:ActionsType) => void
 }
 
 

@@ -1,7 +1,7 @@
 import s from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
-import {dialogsType,messageType,messagesType} from "../../State";
-import {createRef} from "react";
+import {dialogsType, messageType, messagesType, ActionsType, addMessageAC, updateNewMessageAC} from "../../State";
+import {ChangeEvent, createRef} from "react";
 
 const DialogItem = (props:dialogsType) => {
     return(
@@ -10,7 +10,6 @@ const DialogItem = (props:dialogsType) => {
         </div>
     )
 }
-
 
 
 const Message = (props:messageType) => {
@@ -23,8 +22,8 @@ const Message = (props:messageType) => {
 
 type DialogsProps = {
     messages:messagesType
+    dispatch: (action:ActionsType ) => void
 }
-
 
 export const Dialogs = (props:DialogsProps) => {
 
@@ -37,16 +36,17 @@ export const Dialogs = (props:DialogsProps) => {
 
     let messageElement = messages.map(el => <Message message={el.message} id={el.id}/>)
 
-    const newMessage = createRef<HTMLTextAreaElement>()
 
     let addMessage = () => {
-        if(newMessage.current){
-            let message = newMessage.current.value
-            alert(message)
-        }
+        props.dispatch(addMessageAC())
+        props.dispatch(updateNewMessageAC(''))
     }
 
-
+    const onChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
+        if(e.currentTarget) {
+            props.dispatch(updateNewMessageAC(e.currentTarget.value))
+        }
+    }
 return(
     <div className={s.dialogs}>
         <div className={s.dialogsItems}>
@@ -55,8 +55,10 @@ return(
         <div className={s.messages}>
             {messageElement}
         </div>
-        <textarea ref={newMessage}></textarea>
+        <div>
+        <textarea  placeholder={'Enter your message'} onChange={onChange} value={props.messages.newMessageText}></textarea>
         <button onClick={addMessage}>Send Message</button>
+        </div>
     </div>
 )
 }

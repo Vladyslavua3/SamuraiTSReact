@@ -2,7 +2,7 @@
 
 .nav{
     grid-area: n;
-    background-color: burlywood;
+    background-color: #285430;
 }
 
 div a{
@@ -10,6 +10,6 @@ div a{
     color: white;
 }
 
-div a.activeLink{
+.activeLink{
   color: gold;
 }

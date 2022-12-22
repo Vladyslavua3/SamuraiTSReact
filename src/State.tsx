@@ -1,3 +1,6 @@
+import {dividerClasses} from "@mui/material";
+
+
 export type dialogsType = {
     id: string
     name: string
@@ -21,6 +24,7 @@ export type profilePageType = {
 }
 
 export type messagesType = {
+    newMessageText:string
     message: Array<messageType>
     dialogs:Array<dialogsType>
 }
@@ -39,14 +43,20 @@ export type UpdatePostACType = {
     newText:string
 }
 
+export type addMessageACType = {
+    type:'ADD-MESSAGE'
+}
+export type UpdateMessageACType = ReturnType<typeof updateNewMessageAC>
+
+export type ActionsType = addPostACType | UpdatePostACType | addMessageACType | UpdateMessageACType
+
 export type StoreType = {
     _state:stateType
     _onChange:() => void
     subscribe:(callback: () => void) => void
     getState:() => stateType
-    dispatch:(action:addPostACType | UpdatePostACType ) => void
+    dispatch:(action:ActionsType ) => void
 }
-
 
 
 
@@ -70,6 +80,7 @@ export let store:StoreType = {
             ]
         },
         messages: {
+            newMessageText:'Hi',
             message: [
                 {
                     id: 1,
@@ -130,11 +141,41 @@ export let store:StoreType = {
             }
             this._state.profilePage.postData.push(newPost);
             this._onChange();
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        }
+        else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.newText;
+            this._onChange()
+        }
+        else if (action.type === 'ADD-MESSAGE') {
+            const newMessage:messageType = {
+                id:this._state.messages.message.length + 1,
+                message:this._state.messages.newMessageText
+            }
+            this._state.messages.message.push(newMessage);
+            this._onChange()
+        }
+        else if(action.type === 'UPDATE-MESSAGE-TEXT'){
+            this._state.messages.newMessageText = action.message
             this._onChange()
         }
     }
 
 }
 
+export const addPostActionCreator = ():ActionsType => ({type: 'ADD-POST'})
+
+export const updateNewPostTextActionCreator = (newText:string):ActionsType => {
+    return{
+        type:'UPDATE-NEW-POST-TEXT',
+        newText:newText
+    }
+}
+
+export const addMessageAC = ():ActionsType => ({type:'ADD-MESSAGE'})
+
+export const updateNewMessageAC = (message:string) => {
+    return{
+        type:'UPDATE-MESSAGE-TEXT',
+        message:message
+    }as const
+}
