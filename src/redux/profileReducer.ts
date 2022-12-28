@@ -11,7 +11,25 @@ export const updateNewPostTextActionCreator = (newText:string):ActionsType => {
 }
 
 
-export const profileReducer = (state:profilePageType,action:ActionsType) => {
+const initialState:profilePageType = {
+    newPostText: 'LOL',
+    postData: [
+        {
+            id: 1,
+            post: 'Holla',
+            likeCount: 5,
+            photo: 'https://static01.nyt.com/images/2022/09/16/arts/16CAMERON1/16CAMERON1-mediumSquareAt3X.jpg'
+        },
+        {
+            id: 2,
+            post: 'Shalom',
+            likeCount: 10,
+            photo: 'https://hips.hearstapps.com/wdy.h-cdn.co/assets/17/39/cola-0247.jpg'
+        }
+    ]
+}
+
+export const profileReducer = (state:profilePageType = initialState,action:ActionsType):profilePageType => {
     switch (action.type) {
         case "ADD-POST":
             const newPost: postDataType = {

@@ -9,15 +9,17 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {StoreType} from "./Store";
+import {store} from "./redux/reduxStore";
 
 
-type AppProps = {
-    store: StoreType
-}
+// type AppProps = {
+//     store: StoreType
+// }
 
 
-const App = (props: AppProps) => {
-    const state = props.store.getState()
+const App = () => {
+    // const state = props.store.getState()
+    const stateTwo = store.getState()
 
 
     return (
@@ -28,9 +30,9 @@ const App = (props: AppProps) => {
                 <div className='app-wrapper-content'>
                     <Routes>
                         <Route path='/dialogs'
-                               element={<Dialogs messages={state.messages} dispatch={props.store.dispatch.bind(props.store)}/>}/>
-                        <Route path='/profile' element={<Profile profilePage={state.profilePage}
-                                                                 dispatch={props.store.dispatch.bind(props.store)}
+                               element={<Dialogs messages={stateTwo.messages} dispatch={store.dispatch.bind(store)}/>}/>
+                        <Route path='/profile' element={<Profile profilePage={stateTwo.profilePage}
+                                                                 dispatch={store.dispatch.bind(store)}
                                                                  />}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>

@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {store} from "./Store";
+import {store} from "./redux/reduxStore";
 
 
 const rerenderEntireTree = () => {
     ReactDOM.render(
-        <App store={store}/>,
+        <App />,
         document.getElementById('root'),
     );
 }

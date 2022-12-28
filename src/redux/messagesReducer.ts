@@ -9,7 +9,51 @@ export const updateNewMessageAC = (message:string) => {
     }as const
 }
 
-export const messagesReducer = (state: messagesType, action: ActionsType) => {
+
+
+const initialState:messagesType =  {
+    newMessageText:'',
+    message: [
+        {
+            id: 1,
+            message: 'Hi'
+        },
+        {
+            id: 2,
+            message: 'How are you'
+        },
+        {
+            id: 3,
+            message: 'Holla'
+        },
+        {
+            id: 4,
+            message: 'Whatsuuuuup?'
+        }
+    ],
+    dialogs: [
+        {
+            id: '1',
+            name: 'Nastya'
+        },
+        {
+            id: '2',
+            name: 'Vladlen'
+        },
+        {
+            id: '3',
+            name: 'Anastas'
+        },
+        {
+            id: '4',
+            name: 'Vladik'
+        },
+
+    ]
+}
+
+
+export const messagesReducer = (state: messagesType = initialState, action: ActionsType):messagesType => {
     switch (action.type) {
         case "ADD-MESSAGE":
             const newMessage: messageType = {
