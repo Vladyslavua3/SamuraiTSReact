@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {store} from "./State";
+import {store} from "./Store";
 
 
 const rerenderEntireTree = () => {

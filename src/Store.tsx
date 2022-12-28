@@ -1,4 +1,6 @@
-import {dividerClasses} from "@mui/material";
+
+import {profileReducer} from "./redux/profileReducer";
+import {messagesReducer} from "./redux/messagesReducer";
 
 
 export type dialogsType = {
@@ -46,7 +48,11 @@ export type UpdatePostACType = {
 export type addMessageACType = {
     type:'ADD-MESSAGE'
 }
-export type UpdateMessageACType = ReturnType<typeof updateNewMessageAC>
+
+export type UpdateMessageACType = {
+    type:'UPDATE-MESSAGE-TEXT',
+    message:string
+}
 
 export type ActionsType = addPostACType | UpdatePostACType | addMessageACType | UpdateMessageACType
 
@@ -132,50 +138,12 @@ export let store:StoreType = {
     },
 
     dispatch(action){
-        if (action.type === 'ADD-POST') {
-            const newPost: postDataType = {
-                id: this._state.profilePage.postData.length + 1,
-                post: this._state.profilePage.newPostText,
-                likeCount: 0,
-                photo: ''
-            }
-            this._state.profilePage.postData.push(newPost);
-            this._onChange();
-        }
-        else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText;
-            this._onChange()
-        }
-        else if (action.type === 'ADD-MESSAGE') {
-            const newMessage:messageType = {
-                id:this._state.messages.message.length + 1,
-                message:this._state.messages.newMessageText
-            }
-            this._state.messages.message.push(newMessage);
-            this._onChange()
-        }
-        else if(action.type === 'UPDATE-MESSAGE-TEXT'){
-            this._state.messages.newMessageText = action.message
-            this._onChange()
-        }
+
+        this._state.profilePage = profileReducer(this._state.profilePage,action)
+
+        this._state.messages = messagesReducer(this._state.messages,action)
+
+        this._onChange()
     }
 
-}
-
-export const addPostActionCreator = ():ActionsType => ({type: 'ADD-POST'})
-
-export const updateNewPostTextActionCreator = (newText:string):ActionsType => {
-    return{
-        type:'UPDATE-NEW-POST-TEXT',
-        newText:newText
-    }
-}
-
-export const addMessageAC = ():ActionsType => ({type:'ADD-MESSAGE'})
-
-export const updateNewMessageAC = (message:string) => {
-    return{
-        type:'UPDATE-MESSAGE-TEXT',
-        message:message
-    }as const
 }

@@ -1,7 +1,8 @@
 import s from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
-import {dialogsType, messageType, messagesType, ActionsType, addMessageAC, updateNewMessageAC} from "../../State";
+import {dialogsType, messageType, messagesType, ActionsType} from "../../Store";
 import {ChangeEvent, createRef} from "react";
+import {addMessageAC, updateNewMessageAC} from "../../redux/messagesReducer";
 
 const DialogItem = (props:dialogsType) => {
     return(
