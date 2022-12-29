@@ -1,13 +1,13 @@
 import React from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {ActionsType, profilePageType} from "../../../Store";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profileReducer";
+import {profilePageType} from "../../../Store";
 
 type myPostsProps = {
     profilePage:profilePageType
     newPostText:string
-    dispatch: (action:ActionsType ) => void
+    updateNewPostText: (text:string) => void
+    addPost:()=>void
 }
 
 
@@ -19,13 +19,14 @@ export const MyPosts = (props:myPostsProps) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-        props.dispatch(addPostActionCreator())
-        props.dispatch(updateNewPostTextActionCreator(''))
+        props.addPost()
+        props.updateNewPostText('')
     }
 
     const onPostChange = () => {
         if (newPostElement.current) {
-            props.dispatch(updateNewPostTextActionCreator(newPostElement.current.value))
+            const text = newPostElement.current.value
+            props.updateNewPostText(text)
         }
     }
 

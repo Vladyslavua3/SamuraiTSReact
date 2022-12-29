@@ -1,8 +1,7 @@
 import s from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
-import {dialogsType, messageType, messagesType, ActionsType} from "../../Store";
-import {ChangeEvent, createRef} from "react";
-import {addMessageAC, updateNewMessageAC} from "../../redux/messagesReducer";
+import {dialogsType, messageType, messagesType} from "../../Store";
+import {ChangeEvent} from "react";
 
 const DialogItem = (props:dialogsType) => {
     return(
@@ -23,7 +22,8 @@ const Message = (props:messageType) => {
 
 type DialogsProps = {
     messages:messagesType
-    dispatch: (action:ActionsType ) => void
+    addMessage:()=> void
+    onChange:(text:string) => void
 }
 
 export const Dialogs = (props:DialogsProps) => {
@@ -39,13 +39,14 @@ export const Dialogs = (props:DialogsProps) => {
 
 
     let addMessage = () => {
-        props.dispatch(addMessageAC())
-        props.dispatch(updateNewMessageAC(''))
+        props.addMessage()
+        props.onChange('')
     }
 
     const onChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
         if(e.currentTarget) {
-            props.dispatch(updateNewMessageAC(e.currentTarget.value))
+            const text = e.currentTarget.value
+            props.onChange(text)
         }
     }
 return(
