@@ -2,6 +2,7 @@ import s from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
 import {dialogsType, messageType, messagesType} from "../../Store";
 import {ChangeEvent} from "react";
+import {DialogsPropsType} from "./DialogsContainer";
 
 const DialogItem = (props:dialogsType) => {
     return(
@@ -26,16 +27,16 @@ type DialogsProps = {
     onChange:(text:string) => void
 }
 
-export const Dialogs = (props:DialogsProps) => {
+export const Dialogs = (props:DialogsPropsType) => {
 
 
     let dialogs = props.messages.dialogs
 
-    let dialogsElement = dialogs.map(el => <DialogItem id={el.id} name={el.name}/>)
+    let dialogsElement = dialogs.map(el => <DialogItem key={el.id} id={el.id} name={el.name}/>)
 
     let messages = props.messages.message
 
-    let messageElement = messages.map(el => <Message message={el.message} id={el.id}/>)
+    let messageElement = messages.map(el => <Message key={el.id} message={el.message} id={el.id}/>)
 
 
     let addMessage = () => {

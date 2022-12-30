@@ -1,4 +1,23 @@
-import {ActionsType, messagesType, messageType} from "../Store";
+import {ActionsType} from "../Store";
+
+type messageType = {
+    message: string
+    id: number
+}
+
+type dialogsType = {
+    id: string
+    name: string
+}
+
+
+ type messagesType = {
+    newMessageText:string
+    message: Array<messageType>
+    dialogs:Array<dialogsType>
+}
+
+
 
 export const addMessageAC = ():ActionsType => ({type:'ADD-MESSAGE'})
 
@@ -61,10 +80,10 @@ export const messagesReducer = (state: messagesType = initialState, action: Acti
                 message: state.newMessageText
             }
             state.message.push(newMessage);
-            return state;
+            return {...state};
         case "UPDATE-MESSAGE-TEXT":
             state.newMessageText = action.message;
-            return state;
+            return {...state};
         default:return state
     }
 }

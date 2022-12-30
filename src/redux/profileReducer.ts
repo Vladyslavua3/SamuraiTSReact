@@ -1,17 +1,17 @@
 import {ActionsType, postDataType, profilePageType} from "../Store";
 
 
-export const addPostActionCreator = ():ActionsType => ({type: 'ADD-POST'})
+export const addPostActionCreator = (): ActionsType => ({type: 'ADD-POST'})
 
-export const updateNewPostTextActionCreator = (newText:string):ActionsType => {
-    return{
-        type:'UPDATE-NEW-POST-TEXT',
-        newText:newText
-    }as const
+export const updateNewPostTextActionCreator = (newText: string): ActionsType => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        newText: newText
+    } as const
 }
 
 
-const initialState:profilePageType = {
+const initialState: profilePageType = {
     newPostText: 'LOL',
     postData: [
         {
@@ -29,7 +29,7 @@ const initialState:profilePageType = {
     ]
 }
 
-export const profileReducer = (state:profilePageType = initialState,action:ActionsType):profilePageType => {
+export const profileReducer = (state: profilePageType = initialState, action: ActionsType): profilePageType => {
     switch (action.type) {
         case "ADD-POST":
             const newPost: postDataType = {
@@ -39,11 +39,13 @@ export const profileReducer = (state:profilePageType = initialState,action:Actio
                 photo: ''
             };
             state.postData.push(newPost);
-            return state;
+            return {...state};
         case "UPDATE-NEW-POST-TEXT":
+
             state.newPostText = action.newText
-            return state;
-        default:return state
+            return {...state};
+        default:
+            return state
     }
 
 }

@@ -1,14 +1,9 @@
 import React from "react";
-
 import s from "./Profile.module.css"
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {profilePageType} from "../../Store";
 import {MyPostsContainer} from "./MyPosts/MyPostContainer";
 
 
-type profileProps = {
-    profilePage:profilePageType
-}
 
 
 export const Profile = () => {

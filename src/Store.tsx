@@ -1,8 +1,4 @@
 
-import {profileReducer} from "./redux/profileReducer";
-import {messagesReducer} from "./redux/messagesReducer";
-
-
 export type dialogsType = {
     id: string
     name: string

@@ -1,20 +1,13 @@
 import React from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {profilePageType} from "../../../Store";
-
-type myPostsProps = {
-    profilePage:profilePageType
-    newPostText:string
-    updateNewPostText: (text:string) => void
-    addPost:()=>void
-}
+import {MyPostPropsType} from "./MyPostContainer";
 
 
 
-export const MyPosts = (props:myPostsProps) => {
+export const MyPosts = (props:MyPostPropsType) => {
 
-    let postsItem = props.profilePage.postData.map(el => <Post id={el.id} img={el.photo} post={el.post} likeCount={el.likeCount}/>)
+    let postsItem = props.profilePage.postData.map(el => <Post key={el.id} id={el.id} img={el.photo} post={el.post} likeCount={el.likeCount}/>)
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
