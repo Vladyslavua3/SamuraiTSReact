@@ -40,7 +40,7 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
                     id: state.postData.length + 1,
                     post: newPostText,
                     likeCount: 0,
-                    photo: ''
+                    photo: 'https://static01.nyt.com/images/2022/09/16/arts/16CAMERON1/16CAMERON1-mediumSquareAt3X.jpg'
                 }]
             }
 

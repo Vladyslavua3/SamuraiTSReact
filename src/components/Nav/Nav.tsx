@@ -19,6 +19,9 @@ export const Nav = () => {
             <NavLink to='/music' className={({isActive})=>isActive?s.activeLink:''}>Music</NavLink>
         </div>
         <div>
+            <NavLink to='/users' className={({isActive})=>isActive?s.activeLink:''}>Users</NavLink>
+        </div>
+        <div>
             <NavLink to='/settings'  className={({isActive})=>isActive?s.activeLink:''}>Settings</NavLink>
         </div>
     </nav>
