@@ -12,7 +12,7 @@ export const updateNewPostTextActionCreator = (newText: string): ActionsType => 
 
 
 const initialState: profilePageType = {
-    newPostText: 'LOL',
+    newPostText: '',
     postData: [
         {
             id: 1,
@@ -29,21 +29,29 @@ const initialState: profilePageType = {
     ]
 }
 
-export const profileReducer = (state: profilePageType = initialState, action: ActionsType): profilePageType => {
+export const profileReducer = (state: profilePageType = initialState, action: ActionsType): any => {
     switch (action.type) {
-        case "ADD-POST":
-            const newPost: postDataType = {
-                id: state.postData.length + 1,
-                post: state.newPostText,
-                likeCount: 0,
-                photo: ''
-            };
-            state.postData.push(newPost);
-            return {...state};
-        case "UPDATE-NEW-POST-TEXT":
+        case "ADD-POST": {
+            let newPostText = state.newPostText
 
-            state.newPostText = action.newText
-            return {...state};
+            let stateCopy = {
+                ...state,
+                postData:[...state.postData,{
+                    id: state.postData.length + 1,
+                    post: newPostText,
+                    likeCount: 0,
+                    photo: ''
+                }]
+            }
+
+            return stateCopy;
+        }
+        case "UPDATE-NEW-POST-TEXT":
+            let stateCopy = {
+                ...state,
+                newPostText:action.newText
+            }
+            return stateCopy;
         default:
             return state
     }

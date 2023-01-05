@@ -21,11 +21,6 @@ const Message = (props:messageType) => {
     )
 }
 
-type DialogsProps = {
-    messages:messagesType
-    addMessage:()=> void
-    onChange:(text:string) => void
-}
 
 export const Dialogs = (props:DialogsPropsType) => {
 

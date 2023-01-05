@@ -11,27 +11,25 @@ type dialogsType = {
 }
 
 
- type messagesType = {
-    newMessageText:string
+type messagesType = {
+    newMessageText: string
     message: Array<messageType>
-    dialogs:Array<dialogsType>
+    dialogs: Array<dialogsType>
 }
 
 
+export const addMessageAC = (): ActionsType => ({type: 'ADD-MESSAGE'})
 
-export const addMessageAC = ():ActionsType => ({type:'ADD-MESSAGE'})
-
-export const updateNewMessageAC = (message:string) => {
-    return{
-        type:'UPDATE-MESSAGE-TEXT',
-        message:message
-    }as const
+export const updateNewMessageAC = (message: string) => {
+    return {
+        type: 'UPDATE-MESSAGE-TEXT',
+        message: message
+    } as const
 }
 
 
-
-const initialState:messagesType =  {
-    newMessageText:'',
+const initialState: messagesType = {
+    newMessageText: '',
     message: [
         {
             id: 1,
@@ -72,19 +70,29 @@ const initialState:messagesType =  {
 }
 
 
-export const messagesReducer = (state: messagesType = initialState, action: ActionsType):messagesType => {
+export const messagesReducer = (state: messagesType = initialState, action: ActionsType): messagesType => {
+
+
+    let copyState;
+
     switch (action.type) {
         case "ADD-MESSAGE":
-            const newMessage: messageType = {
-                id: state.message.length + 1,
-                message: state.newMessageText
+            let newText = state.newMessageText
+            copyState = {
+                ...state,
+                message: [...state.message,
+                    {id: state.message.length + 1, message: newText}
+                ]
             }
-            state.message.push(newMessage);
-            return {...state};
+            return {...copyState};
         case "UPDATE-MESSAGE-TEXT":
-            state.newMessageText = action.message;
-            return {...state};
-        default:return state
+            copyState = {
+                ...state,
+                newMessageText: action.message
+            }
+            return {...copyState};
+        default:
+            return state
     }
 }
 
