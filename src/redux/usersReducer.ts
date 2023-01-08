@@ -1,21 +1,21 @@
 import {ActionsType} from "../Store";
 
 
-export type UserType = {
-    id:number,
-    fullName:string
-    status:string
-    followed:boolean
-    photo:string
-    location:{
-        city:string
-        country:string
-    }
-}
-
-export type UsersType = {
-    users:UserType[]
-}
+// export type UserType = {
+//     id:number,
+//     fullName:string
+//     status:string
+//     followed:boolean
+//     photo:string
+//     location:{
+//         city:string
+//         country:string
+//     }
+// }
+//
+// export type UsersType = {
+//     users:UserType[]
+// }
 
 export type FollowACType = ReturnType<typeof followActionCreator>
 
@@ -47,14 +47,28 @@ export const setUsersAC = (users:any) => {
 }
 
 
+type UsersAxiosType = {
+    name: string
+    id: number,
+    uniqueUrlName: string,
+    photos: {
+        small: string,
+        large: string
+    },
+    status: null | string,
+    followed: boolean
+}
+
+export type InitialType = {
+    users:Array<UsersAxiosType>
+}
 
 
-
-const initialState: UsersType = {
+const initialState: InitialType = {
     users: []
 }
 
-export const usersReducer = (state: UsersType = initialState, action: ActionsType): UsersType=> {
+export const usersReducer = (state: InitialType = initialState, action: ActionsType):InitialType=> {
 
     switch (action.type) {
         case "FOLLOW":
