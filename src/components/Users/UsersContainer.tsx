@@ -1,4 +1,4 @@
-import {Users} from "./Users";
+import UsersC from "./UsersC";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reduxStore";
 import {Dispatch} from "redux";
@@ -41,4 +41,4 @@ let mapDispatchToProps = (dispatch:Dispatch):mapDispatchType => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps,mapDispatchToProps)(Users)
+export const UsersContainer = connect(mapStateToProps,mapDispatchToProps)(UsersC)
