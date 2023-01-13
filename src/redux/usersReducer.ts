@@ -1,27 +1,14 @@
 import {ActionsType} from "../Store";
 
-
-// export type UserType = {
-//     id:number,
-//     fullName:string
-//     status:string
-//     followed:boolean
-//     photo:string
-//     location:{
-//         city:string
-//         country:string
-//     }
-// }
-//
-// export type UsersType = {
-//     users:UserType[]
-// }
-
 export type FollowACType = ReturnType<typeof followActionCreator>
 
 export type UnFollowACType = ReturnType<typeof unfollowActionCreator>
 
 export type SetUsersACType = ReturnType<typeof setUsersAC>
+
+export type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
+
+export type setUsersTotalCountACType = ReturnType<typeof setUsersTotalCountAC>
 
 
 export const followActionCreator = (userId:number) => {
@@ -46,6 +33,20 @@ export const setUsersAC = (users:any) => {
     } as const
 }
 
+export const setCurrentPageAC = (currentPage:number) => {
+    return{
+        type:'SET-PAGE',
+        currentPage
+    }as const
+}
+
+export const setUsersTotalCountAC = (total:number) => {
+    return{
+        type:'SET-TOTAL',
+        total
+    }as const
+}
+
 
 type UsersAxiosType = {
     name: string
@@ -61,11 +62,17 @@ type UsersAxiosType = {
 
 export type InitialType = {
     users:Array<UsersAxiosType>
+    pageSize: number
+    totalUsersCount:number
+    currentPage:number
 }
 
 
 const initialState: InitialType = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount:0,
+    currentPage:1
 }
 
 export const usersReducer = (state: InitialType = initialState, action: ActionsType):InitialType=> {
@@ -92,10 +99,14 @@ export const usersReducer = (state: InitialType = initialState, action: ActionsT
                 })
             }
         case "SET-USERS":{
-            return {...state,users:[...state.users,...action.users]}
+            return {...state,users:action.users }
         }
-
-
+        case "SET-PAGE":{
+            return {...state,currentPage:action.currentPage}
+        }
+        case "SET-TOTAL":{
+            return {...state,totalUsersCount:action.total < 200 ? action.total : 50}
+        }
         default :
             return state
     }

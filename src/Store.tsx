@@ -1,4 +1,10 @@
-import {followActionCreator, FollowACType, SetUsersACType, UnFollowACType} from "./redux/usersReducer";
+import {
+    followActionCreator,
+    FollowACType,
+    setCurrentPageACType,
+    SetUsersACType, setUsersTotalCountACType,
+    UnFollowACType
+} from "./redux/usersReducer";
 
 export type dialogsType = {
     id: string
@@ -52,7 +58,16 @@ export type UpdateMessageACType = {
 }
 
 
-export type ActionsType = addPostACType | UpdatePostACType | addMessageACType | UpdateMessageACType | UnFollowACType | FollowACType | SetUsersACType
+export type ActionsType =
+    addPostACType
+    | UpdatePostACType
+    | addMessageACType
+    | UpdateMessageACType
+    | UnFollowACType
+    | FollowACType
+    | SetUsersACType
+    | setCurrentPageACType
+    | setUsersTotalCountACType
 
 // export type StoreType = {
 //     _state:stateType

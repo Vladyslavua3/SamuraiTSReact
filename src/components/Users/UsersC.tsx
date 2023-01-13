@@ -1,23 +1,53 @@
 import {usersContainerType} from "./UsersContainer";
 import axios from "axios";
-import React from "react";
+import React, {MouseEventHandler} from "react";
+import s from'./UsersC.module.css'
 
 
 
 class UsersC extends React.Component<usersContainerType>{
 
    componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response=>{
             this.props.setUsers(response.data.items)
+                this.props.setTotalCount(response.data.totalCount)
+            })
+    }
+
+    onPageChanged = (pageNumber:number)=> {
+       this.props.setCurrentPage(+pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then(response=>{
+                this.props.setUsers(response.data.items)
             })
     }
 
 
 
     render() {
+
+       let pagesCount = Math.ceil(this.props.totalCount / this.props.pageSize)
+
+        let pages = [];
+
+       for(let i = 1; i <= pagesCount;i++){
+           pages.push(i);
+       }
+
+
+
         return (
             <div>
+                <div>
+                    {
+                        pages.map(p => {
+                    return (
+                        <span onClick={()=>{this.onPageChanged(p)}} className={this.props.currentPage === p ? s.selected:''}>{p}</span>
+                        )
+                        })
+                    }
+                </div>
                 {
                     this.props.users.users.map(u => <div key={u.id}>
                   <span>
