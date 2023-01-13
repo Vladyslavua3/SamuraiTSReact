@@ -10,6 +10,8 @@ export type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 
 export type setUsersTotalCountACType = ReturnType<typeof setUsersTotalCountAC>
 
+export type setIsFetchingACType = ReturnType<typeof setIsFetchingAC>
+
 
 export const followActionCreator = (userId:number) => {
     return {
@@ -47,6 +49,13 @@ export const setUsersTotalCountAC = (total:number) => {
     }as const
 }
 
+export const setIsFetchingAC = (isFetching:boolean) => {
+    return{
+        type:'TOGGLE-IS-FETCHING',
+        isFetching
+    }as const
+}
+
 
 type UsersAxiosType = {
     name: string
@@ -65,6 +74,7 @@ export type InitialType = {
     pageSize: number
     totalUsersCount:number
     currentPage:number
+    isFetching:boolean
 }
 
 
@@ -72,7 +82,8 @@ const initialState: InitialType = {
     users: [],
     pageSize: 5,
     totalUsersCount:0,
-    currentPage:1
+    currentPage:1,
+    isFetching:false
 }
 
 export const usersReducer = (state: InitialType = initialState, action: ActionsType):InitialType=> {
@@ -106,6 +117,9 @@ export const usersReducer = (state: InitialType = initialState, action: ActionsT
         }
         case "SET-TOTAL":{
             return {...state,totalUsersCount:action.total < 200 ? action.total : 50}
+        }
+        case "TOGGLE-IS-FETCHING":{
+            return {...state,isFetching:action.isFetching}
         }
         default :
             return state

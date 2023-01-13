@@ -1,7 +1,7 @@
 import {
     followActionCreator,
     FollowACType,
-    setCurrentPageACType,
+    setCurrentPageACType, setIsFetchingACType,
     SetUsersACType, setUsersTotalCountACType,
     UnFollowACType
 } from "./redux/usersReducer";
@@ -68,6 +68,7 @@ export type ActionsType =
     | SetUsersACType
     | setCurrentPageACType
     | setUsersTotalCountACType
+    | setIsFetchingACType
 
 // export type StoreType = {
 //     _state:stateType
