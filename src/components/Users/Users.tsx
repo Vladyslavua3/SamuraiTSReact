@@ -1,4 +1,4 @@
-import {usersContainerType} from "./UsersContainer";
+
 import s from "./UsersC.module.css";
 import React from "react";
 import {InitialType} from "../../redux/usersReducer";
