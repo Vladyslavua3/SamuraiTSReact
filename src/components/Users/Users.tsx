@@ -1,116 +1,42 @@
 import {usersContainerType} from "./UsersContainer";
-import axios from "axios";
-import {useEffect} from "react";
+import s from "./UsersC.module.css";
+import React from "react";
+import {InitialType} from "../../redux/usersReducer";
 
+type  UsersTypeProps = {
+    follow:(userId:number) => void
+    unfollow:(userId:number) => void
+    setUsers:(users:InitialType[]) => void
+    setCurrentPage:(currentPage:number) => void
+    setTotalCount:(total:number)=>void
+    onPageChanged : (pageNumber:number)=>void
+    users:InitialType
+    pageSize:number
+    totalCount:number
+    currentPage:number
+}
 
+export const Users = (props: UsersTypeProps) => {
 
-export const Users = (props: usersContainerType) => {
-    // if(props.users.length === 0) {
-    //     props.setUsers([
-    //         {
-    //             id: 1,
-    //             fullName: 'Gera',
-    //             status: 'Boss',
-    //             followed: true,
-    //             photo: 'https://static01.nyt.com/images/2022/09/16/arts/16CAMERON1/16CAMERON1-mediumSquareAt3X.jpg',
-    //             location: {
-    //                 city: 'Kharkov',
-    //                 country: 'Ukraine'
-    //             },
-    //         },
-    //         {
-    //             id: 2,
-    //             fullName: 'John',
-    //             status: 'Lox',
-    //             followed: true,
-    //             photo: 'https://static01.nyt.com/images/2022/09/16/arts/16CAMERON1/16CAMERON1-mediumSquareAt3X.jpg',
-    //             location: {
-    //                 city: 'Kiev',
-    //                 country: 'Ukraine'
-    //             },
-    //         },
-    //         {
-    //             id: 3,
-    //             fullName: 'Bob',
-    //             status: 'worker',
-    //             followed: false,
-    //             photo: 'https://static01.nyt.com/images/2022/09/16/arts/16CAMERON1/16CAMERON1-mediumSquareAt3X.jpg',
-    //             location: {
-    //                 city: 'Kharkov',
-    //                 country: 'Ukraine'
-    //             },
-    //         },
-    //         {
-    //             id: 4,
-    //             fullName: 'Gon',
-    //             status: 'Cleaner',
-    //             followed: false,
-    //             photo: 'https://static01.nyt.com/images/2022/09/16/arts/16CAMERON1/16CAMERON1-mediumSquareAt3X.jpg',
-    //             location: {
-    //                 city: 'Kharkov',
-    //                 country: 'Ukraine'
-    //             },
-    //         },
-    //         {
-    //             id: 5,
-    //             fullName: 'Don',
-    //             status: 'Helper',
-    //             followed: true,
-    //             photo: 'https://static01.nyt.com/images/2022/09/16/arts/16CAMERON1/16CAMERON1-mediumSquareAt3X.jpg',
-    //             location: {
-    //                 city: 'Kharkov',
-    //                 country: 'Ukraine'
-    //             },
-    //         },
-    //         {
-    //             id: 6,
-    //             fullName: 'Kon',
-    //             status: 'LOL',
-    //             followed: true,
-    //             photo: 'https://static01.nyt.com/images/2022/09/16/arts/16CAMERON1/16CAMERON1-mediumSquareAt3X.jpg',
-    //             location: {
-    //                 city: 'Kharkov',
-    //                 country: 'Ukraine'
-    //             },
-    //         },
-    //         {
-    //             id: 7,
-    //             fullName: 'Kean',
-    //             status: 'Manager',
-    //             followed: true,
-    //             photo: 'https://static01.nyt.com/images/2022/09/16/arts/16CAMERON1/16CAMERON1-mediumSquareAt3X.jpg',
-    //             location: {
-    //                 city: 'Kharkov',
-    //                 country: 'Ukraine'
-    //             },
-    //         },
-    //         {
-    //             id: 8,
-    //             fullName: 'Tor',
-    //             status: 'Boss2',
-    //             followed: false,
-    //             photo: 'https://static01.nyt.com/images/2022/09/16/arts/16CAMERON1/16CAMERON1-mediumSquareAt3X.jpg',
-    //             location: {
-    //                 city: 'Kharkov',
-    //                 country: 'Ukraine'
-    //             },
-    //         },
-    //     ])
-    // }
+    let pagesCount = Math.ceil(props.totalCount / props.pageSize)
 
-        let getUsers = () => {
-            if (props.users.users.length === 0){
-                axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response=>{
-                    props.setUsers(response.data.items)})}
-        }
+    let pages = [];
 
-        // if (props.users.users.length === 0){
-        // axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response=>{
-        //         props.setUsers(response.data.items)})}
+    for(let i = 1; i <= pagesCount;i++){
+        pages.push(i);
+    }
 
     return (
         <div>
-            <button onClick={getUsers}>Get Users</button>
+            <div>
+                {
+                    pages.map(p => {
+                        return (
+                            <span onClick={()=>{props.onPageChanged(p)}} className={props.currentPage === p ? s.selected:''}>{p}</span>
+                        )
+                    })
+                }
+            </div>
             {
                 props.users.users.map(u => <div key={u.id}>
                   <span>

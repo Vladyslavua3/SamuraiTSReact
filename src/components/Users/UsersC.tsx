@@ -2,6 +2,7 @@ import {usersContainerType} from "./UsersContainer";
 import axios from "axios";
 import React, {MouseEventHandler} from "react";
 import s from'./UsersC.module.css'
+import {Users} from "./Users";
 
 
 
@@ -26,56 +27,17 @@ class UsersC extends React.Component<usersContainerType>{
 
 
     render() {
-
-       let pagesCount = Math.ceil(this.props.totalCount / this.props.pageSize)
-
-        let pages = [];
-
-       for(let i = 1; i <= pagesCount;i++){
-           pages.push(i);
-       }
-
-
-
-        return (
-            <div>
-                <div>
-                    {
-                        pages.map(p => {
-                    return (
-                        <span onClick={()=>{this.onPageChanged(p)}} className={this.props.currentPage === p ? s.selected:''}>{p}</span>
-                        )
-                        })
-                    }
-                </div>
-                {
-                    this.props.users.users.map(u => <div key={u.id}>
-                  <span>
-                      <div>
-                          <img src={u.photos.small != null ? u.photos.small:'https://static01.nyt.com/images/2022/09/16/arts/16CAMERON1/16CAMERON1-mediumSquareAt3X.jpg'} style={{width:'100px'}}/>
-                      </div>
-                  </span>
-                        <span>
-                      <div>
-                          {
-                              u.followed
-                                  ? <button onClick={()=>{this.props.follow(u.id)}}>Follow</button>
-                                  : <button onClick={()=>{this.props.unfollow(u.id)}}>Unfollow</button>
-                          }
-                      </div>
-                  </span>
-                        <span>
-                          <div>{u.name}</div>
-                          <div>{u.status}</div>
-                      </span>
-                        <span>
-                             <div>{'u.location.city'}</div>
-                          <div>{'u.location.country'}</div>
-                      </span>
-                    </div>)
-                }
-            </div>
-        )
+        return <Users follow={this.props.follow}
+                      unfollow={this.props.unfollow}
+                      setUsers={this.props.setUsers}
+                      setCurrentPage={this.props.setCurrentPage}
+                      setTotalCount={this.props.setTotalCount}
+                      users={this.props.users}
+                      pageSize={this.props.pageSize}
+                      totalCount={this.props.totalCount}
+                      currentPage={this.props.currentPage}
+                      onPageChanged={this.onPageChanged}
+        />
     }
 }
 
