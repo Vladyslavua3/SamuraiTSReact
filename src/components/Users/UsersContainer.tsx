@@ -1,7 +1,5 @@
-
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reduxStore";
-import {Dispatch} from "redux";
 import {
     followActionCreator,
     InitialType, setCurrentPageAC, setIsFetchingAC,
@@ -85,27 +83,36 @@ let mapStateToProps = (state:AppStateType):mapStateType=> {
     }
 }
 
-let mapDispatchToProps = (dispatch:Dispatch):mapDispatchType => {
-    return{
-        follow:(userId:number) => {
-            dispatch(followActionCreator(userId))
-        },
-        unfollow:(userId:number) => {
-            dispatch(unfollowActionCreator(userId))
-        },
-        setUsers:(users:InitialType[])=>{
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage:(currentPage:number)=>{
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalCount:(total:number)=>{
-            dispatch(setUsersTotalCountAC(total))
-        },
-        setIsFetching:(isFetching:boolean)=>{
-            dispatch(setIsFetchingAC(isFetching))
-        }
-    }
+// let mapDispatchToProps = (dispatch:Dispatch):mapDispatchType => {
+//     return{
+//         follow:(userId:number) => {
+//             dispatch(followActionCreator(userId))
+//         },
+//         unfollow:(userId:number) => {
+//             dispatch(unfollowActionCreator(userId))
+//         },
+//         setUsers:(users:InitialType[])=>{
+//             dispatch(setUsersAC(users))
+//         },
+//         setCurrentPage:(currentPage:number)=>{
+//             dispatch(setCurrentPageAC(currentPage))
+//         },
+//         setTotalCount:(total:number)=>{
+//             dispatch(setUsersTotalCountAC(total))
+//         },
+//         setIsFetching:(isFetching:boolean)=>{
+//             dispatch(setIsFetchingAC(isFetching))
+//         }
+//     }
+// }
+
+let dispatchToProps = {
+    follow: followActionCreator,
+    unfollow:unfollowActionCreator,
+    setUsers:setUsersAC,
+    setCurrentPage:setCurrentPageAC,
+    setTotalCount:setUsersTotalCountAC,
+    setIsFetching:setIsFetchingAC
 }
 
-export const UsersContainer = connect(mapStateToProps,mapDispatchToProps)(UsersC)
+export const UsersContainer = connect(mapStateToProps,dispatchToProps)(UsersC)
