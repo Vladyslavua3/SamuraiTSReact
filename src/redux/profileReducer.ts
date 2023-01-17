@@ -1,4 +1,7 @@
-import {ActionsType, postDataType, profilePageType} from "../Store";
+import {ActionsType, postDataType, profilePageType, ProfileType} from "../Store";
+import {networkInterfaces} from "os";
+
+export type setUserProfileType = ReturnType<typeof setUserProfile>
 
 
 export const addPostActionCreator = (): ActionsType => ({type: 'ADD-POST'})
@@ -10,6 +13,12 @@ export const updateNewPostTextActionCreator = (newText: string): ActionsType => 
     } as const
 }
 
+export const setUserProfile = (profile:ProfileType) =>{
+    return{
+    type:'SET-USERS-PROFILE',
+        profile
+    }as const
+}
 
 const initialState: profilePageType = {
     newPostText: '',
@@ -26,10 +35,31 @@ const initialState: profilePageType = {
             likeCount: 10,
             photo: 'https://hips.hearstapps.com/wdy.h-cdn.co/assets/17/39/cola-0247.jpg'
         }
-    ]
+    ],
+    profile:{
+        "aboutMe": "!!!!!",
+        "contacts": {
+            "facebook": "!!!!!",
+            "website": null,
+            "vk": "!!!!!",
+            "twitter": "!!!!!!!!!!!!",
+            "instagram": "!!!!!!!!!!!",
+            "youtube": null,
+            "github": "!!!!!!!!!!!!",
+            "mainLink": null
+        },
+        "lookingForAJob": true,
+        "lookingForAJobDescription": "!!!!!!!!!!!!!!",
+        "fullName": "!!!!!!!!!!!!!",
+        "userId": 1,
+        "photos": {
+            "small": ''/*"https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0"*/,
+            "large": ''/*"https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"*/
+        }
+    }
 }
 
-export const profileReducer = (state: profilePageType = initialState, action: ActionsType): any => {
+export const profileReducer = (state: profilePageType = initialState, action: ActionsType) => {
     switch (action.type) {
         case "ADD-POST": {
             let newPostText = state.newPostText
@@ -52,6 +82,9 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
                 newPostText:action.newText
             }
             return stateCopy;
+        case "SET-USERS-PROFILE":{
+            return {...state,profile:action.profile}
+        }
         default:
             return state
     }

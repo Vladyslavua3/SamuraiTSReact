@@ -2,14 +2,15 @@ import React from "react";
 import s from "./Profile.module.css"
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostContainer";
+import {profilePageType} from "../../Store";
 
 
 
 
-export const Profile = () => {
+export const Profile = (props:profilePageType) => {
     return (
         <div>
-            <ProfileInfo back_photo={'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'} user_photo={'https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg'}/>
+            <ProfileInfo profile={props.profile}/>
             <MyPostsContainer />
         </div>
     )

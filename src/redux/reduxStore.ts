@@ -1,5 +1,5 @@
 import {combineReducers, createStore} from "redux";
-import {profileReducer} from "./profileReducer";
+import {profileReducer, setUserProfile} from "./profileReducer";
 import {messagesReducer} from "./messagesReducer";
 import {sideBarReducer} from "./sideBarReducer";
 import {usersReducer} from "./usersReducer";
@@ -12,5 +12,6 @@ const reducer = combineReducers({
 })
 
 export type AppStateType = ReturnType<typeof reducer>
+
 
  export const store = createStore(reducer);
