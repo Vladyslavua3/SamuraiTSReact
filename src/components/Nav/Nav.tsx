@@ -7,22 +7,22 @@ export const Nav = () => {
     return(
     <nav className={s.nav}>
         <div>
-            <NavLink to='/profile' className={({isActive})=>isActive?s.activeLink:''}>Profile</NavLink>
+            <NavLink to='/profile' >Profile</NavLink>
         </div>
         <div className={s.item}>
-            <NavLink to='/dialogs' className={({isActive})=>isActive?s.activeLink:''}>Messages</NavLink>
+            <NavLink to='/dialogs'>Messages</NavLink>
         </div>
         <div>
-            <NavLink to='/news' className={({isActive})=>isActive?s.activeLink:''}>News</NavLink>
+            <NavLink to='/news' >News</NavLink>
         </div>
         <div>
-            <NavLink to='/music' className={({isActive})=>isActive?s.activeLink:''}>Music</NavLink>
+            <NavLink to='/music' >Music</NavLink>
         </div>
         <div>
-            <NavLink to='/users' className={({isActive})=>isActive?s.activeLink:''}>Users</NavLink>
+            <NavLink to='/users' >Users</NavLink>
         </div>
         <div>
-            <NavLink to='/settings'  className={({isActive})=>isActive?s.activeLink:''}>Settings</NavLink>
+            <NavLink to='/settings'  >Settings</NavLink>
         </div>
     </nav>
     )

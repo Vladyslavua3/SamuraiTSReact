@@ -6,10 +6,11 @@ import {
     setUsersAC, setUsersTotalCountAC,
     unfollowActionCreator,
 } from "../../redux/usersReducer";
-import React from "react";
+import React, {ComponentType,FC} from "react";
 import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader";
+import {compose} from "redux";
 
 export type mapDispatchType = {
     follow:(userId:number) => void
@@ -30,7 +31,7 @@ export type mapStateType = {
 
 export type usersContainerType = mapDispatchType & mapStateType
 
-class UsersC extends React.Component<usersContainerType>{
+class UsersContainer extends React.Component<usersContainerType>{
 
     componentDidMount() {
         this.props.setIsFetching(true)
@@ -83,29 +84,6 @@ let mapStateToProps = (state:AppStateType):mapStateType=> {
     }
 }
 
-// let mapDispatchToProps = (dispatch:Dispatch):mapDispatchType => {
-//     return{
-//         follow:(userId:number) => {
-//             dispatch(followActionCreator(userId))
-//         },
-//         unfollow:(userId:number) => {
-//             dispatch(unfollowActionCreator(userId))
-//         },
-//         setUsers:(users:InitialType[])=>{
-//             dispatch(setUsersAC(users))
-//         },
-//         setCurrentPage:(currentPage:number)=>{
-//             dispatch(setCurrentPageAC(currentPage))
-//         },
-//         setTotalCount:(total:number)=>{
-//             dispatch(setUsersTotalCountAC(total))
-//         },
-//         setIsFetching:(isFetching:boolean)=>{
-//             dispatch(setIsFetchingAC(isFetching))
-//         }
-//     }
-// }
-
 let dispatchToProps = {
     follow: followActionCreator,
     unfollow:unfollowActionCreator,
@@ -115,4 +93,5 @@ let dispatchToProps = {
     setIsFetching:setIsFetchingAC
 }
 
-export const UsersContainer = connect(mapStateToProps,dispatchToProps)(UsersC)
+export default compose<FC>(
+    connect(mapStateToProps,dispatchToProps))(UsersContainer)

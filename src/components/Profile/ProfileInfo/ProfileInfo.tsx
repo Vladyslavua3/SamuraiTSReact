@@ -1,8 +1,7 @@
-
-import s from "./ProfileInfo.module.css";
 import React from "react";
 import {Preloader} from "../../common/Preloader";
 import {ProfileType} from "../../../Store";
+import s from "./ProfileInfo.module.css";
 
 
 type ProfileInfoProps = {

@@ -1,4 +1,4 @@
-
+import React from "react";
 import {messagesType} from "../../Store";
 import {addMessageAC, updateNewMessageAC} from "../../redux/messagesReducer";
 import {Dialogs} from "./Dialogs";

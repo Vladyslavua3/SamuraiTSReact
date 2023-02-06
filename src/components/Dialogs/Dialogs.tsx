@@ -1,6 +1,7 @@
+import React from "react";
 import s from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
-import {dialogsType, messageType, messagesType} from "../../Store";
+import {dialogsType, messageType} from "../../Store";
 import {ChangeEvent} from "react";
 import {DialogsPropsType} from "./DialogsContainer";
 
