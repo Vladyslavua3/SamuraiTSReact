@@ -9,3 +9,6 @@ header img{
     height: 50px;
     padding-left: 15px;
 }
+.loginBlock{
+    float: right;
+}
