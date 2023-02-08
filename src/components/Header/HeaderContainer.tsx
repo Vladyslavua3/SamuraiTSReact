@@ -30,14 +30,13 @@ class HeaderContainer extends React.Component<headerContainerType>{
     }
 
     render() {
-        return( <div>
-            <Header {...this.props}
+        return <Header {...this.props}
                     userId={this.props.userId}
                     email={this.props.email}
                     login={this.props.login}
-                    isFetching={this.props.isFetching}
+                    isAuth={this.props.isAuth}
             />
-        </div>);
+        ;
     }
 }
 
@@ -47,7 +46,7 @@ const mapStateToProps = (state:AppStateType):initialStateType => {
         userId:state.auth.userId,
         email:state.auth.email,
         login:state.auth.login,
-        isFetching:state.auth.isFetching
+        isAuth:state.auth.isAuth
     }
 }
 export default compose<FC>(connect(mapStateToProps,{setAuthUserData}))(HeaderContainer)

@@ -3,6 +3,7 @@
     background-color: #E5D9B6;
     border-radius: 30px;
     height: 60px;
+
 }
 header img{
     width: 50px;
@@ -11,4 +12,5 @@ header img{
 }
 .loginBlock{
     float: right;
+    color: red;
 }

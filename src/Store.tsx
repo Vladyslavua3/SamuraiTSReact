@@ -2,7 +2,7 @@ import {
     followActionCreator,
     FollowACType,
     setCurrentPageACType, setIsFetchingACType,
-    SetUsersACType, setUsersTotalCountACType,
+    SetUsersACType, setUsersTotalCountACType, toggleIsFollowingACType,
     UnFollowACType
 } from "./redux/usersReducer";
 import {setUserProfileType} from "./redux/profileReducer";
@@ -94,6 +94,7 @@ export type ActionsType =
     | setUsersTotalCountACType
     | setIsFetchingACType
     |setUserProfileType
+    | toggleIsFollowingACType
 
 // export type StoreType = {
 //     _state:stateType
