@@ -20,6 +20,10 @@ export const setUserProfile = (profile:ProfileType) =>{
     }as const
 }
 
+
+
+
+
 const initialState: profilePageType = {
     newPostText: '',
     postData: [

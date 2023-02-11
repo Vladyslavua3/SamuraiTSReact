@@ -2,15 +2,10 @@ import s from "./UsersC.module.css";
 import React from "react";
 import {InitialType} from "../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
-import {follow, unfollow} from "../../api/api";
-import {mapDispatchType} from "./UsersContainer";
 
 type  UsersTypeProps = {
     follow:(userId:number) => void
     unfollow:(userId:number) => void
-    setUsers:(users:InitialType[]) => void
-    setCurrentPage:(currentPage:number) => void
-    setTotalCount:(total:number)=>void
     onPageChanged : (pageNumber:number)=>void
     toggleIsFollowing:(isFetching:boolean,userId:number) => void
     users:InitialType
@@ -59,25 +54,13 @@ export const Users = (props: UsersTypeProps) => {
                           {
                               u.followed
                                   ?
-                                  <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                      props.toggleIsFollowing(true,u.id)
-                                      follow(u.id).then(data => {
-                                          if (data.resultCode === 0) {
-                                              props.unfollow(u.id)
-                                          }
-                                          props.toggleIsFollowing(false,u.id)
-                                      });
-                                  }
-                                  }>Unfollow</button>
+                                  <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={()=>{
+                                      props.unfollow(u.id)
+                                  }}>Unfollow</button>
                                   :
-                                  <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={
-                                      () => {
-                                          unfollow(u.id).then(data => {
-                                              if (data.resultCode === 0) {
-                                                  props.follow(u.id)
-                                              }
-                                          })
-                                      }}>Follow</button>
+                                  <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={()=>{
+                                      props.follow(u.id)
+                                  }}>Follow</button>
                           }
                       </div>
                   </span>
