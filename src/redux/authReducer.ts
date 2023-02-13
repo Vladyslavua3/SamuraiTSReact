@@ -1,4 +1,6 @@
 import React from "react";
+import {Dispatch} from "redux";
+import {headerApi} from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA'
 
@@ -41,6 +43,17 @@ export const setAuthUserData = (userId:number,email:string,login:string) => {
             login
         }
     }as const
+}
+
+export const getAuthUserDataTC = () => {
+    return (dispatch:Dispatch) => {
+        headerApi().then(res => {
+            if(res.resultCode === 0){
+                const {id,email,login} = res.data;
+                dispatch(setAuthUserData(id,email,login))
+            }
+        })
+    }
 }
 
 export default authReducer

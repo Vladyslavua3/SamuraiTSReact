@@ -55,7 +55,6 @@ class UsersContainer extends React.Component<usersContainerType>{
                       currentPage={this.props.currentPage}
                       onPageChanged={this.onPageChanged}
                followingInProgress={this.props.followingInProgress}
-               toggleIsFollowing={this.props.toggleIsFollowing}
         />
 
         </>

@@ -7,7 +7,6 @@ type  UsersTypeProps = {
     follow:(userId:number) => void
     unfollow:(userId:number) => void
     onPageChanged : (pageNumber:number)=>void
-    toggleIsFollowing:(isFetching:boolean,userId:number) => void
     users:InitialType
     pageSize:number
     totalCount:number

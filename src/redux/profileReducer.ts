@@ -1,5 +1,6 @@
-import {ActionsType, postDataType, profilePageType, ProfileType} from "../Store";
-import {networkInterfaces} from "os";
+import {ActionsType, profilePageType, ProfileType} from "../Store";
+import {Dispatch} from "redux";
+import {profileUsers} from "../api/api";
 
 export type setUserProfileType = ReturnType<typeof setUserProfile>
 
@@ -13,16 +14,18 @@ export const updateNewPostTextActionCreator = (newText: string): ActionsType => 
     } as const
 }
 
-export const setUserProfile = (profile:ProfileType) =>{
-    return{
-    type:'SET-USERS-PROFILE',
+export const setUserProfile = (profile:ProfileType) => {
+    return {
+        type: 'SET-USERS-PROFILE',
         profile
-    }as const
+    } as const
 }
 
-
-
-
+export const getUserProfileTC = (userId:string) =>{
+    return (dispatch:Dispatch) => {
+         profileUsers(userId).then(res => dispatch(setUserProfile(res)))
+    }
+}
 
 const initialState: profilePageType = {
     newPostText: '',
