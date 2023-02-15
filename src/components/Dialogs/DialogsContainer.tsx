@@ -1,40 +1,37 @@
-import React from "react";
-import {messagesType} from "../../Store";
-import {addMessageAC, updateNewMessageAC} from "../../redux/messagesReducer";
-import {Dialogs} from "./Dialogs";
-import {connect} from "react-redux";
-import {AppStateType} from "../../redux/reduxStore";
-import {Dispatch} from "redux";
+import React from 'react';
 
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+
+import { addMessageAC, updateNewMessageAC } from '../../redux/messagesReducer';
+import { AppStateType } from '../../redux/reduxStore';
+import { messagesType } from '../../Store';
+
+import { Dialogs } from './Dialogs';
 
 type MapStateContainerProps = {
-    messages:messagesType
-}
+  messages: messagesType;
+};
 
 type MapDispatchPropsType = {
-    addMessage:() => void
-    onChange:(text: string)=>void
-}
+  addMessage: () => void;
+  onChange: (text: string) => void;
+};
 
-export type DialogsPropsType = MapDispatchPropsType & MapStateContainerProps
+export type DialogsPropsType = MapDispatchPropsType & MapStateContainerProps;
 
+const mapStateToProps = (state: AppStateType): MapStateContainerProps => ({
+  messages: state.messages,
+});
 
-let mapStateToProps = (state:AppStateType):MapStateContainerProps => {
-    return{
-        messages:state.messages
-    }
-}
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => ({
+  addMessage: () => {
+    dispatch(addMessageAC());
+    dispatch(updateNewMessageAC(''));
+  },
+  onChange: (text: string) => {
+    dispatch(updateNewMessageAC(text));
+  },
+});
 
-let mapDispatchToProps = (dispatch:Dispatch):MapDispatchPropsType => {
-   return{
-       addMessage:()=>{
-           dispatch(addMessageAC())
-           dispatch(updateNewMessageAC(''))
-       },
-       onChange:(text: string)=>{
-           dispatch(updateNewMessageAC(text))
-       }
-   }
-}
-
-export const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs);
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);

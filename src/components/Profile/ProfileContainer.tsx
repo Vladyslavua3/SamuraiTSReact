@@ -1,8 +1,7 @@
 import React, {FC} from "react";
 import {Profile} from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
-import {getUserProfileTC, setUserProfile} from "../../redux/profileReducer";
+import {getUserProfileTC} from "../../redux/profileReducer";
 import {profilePageType, ProfileType} from "../../Store";
 import {AppStateType} from "../../redux/reduxStore";
 import {compose} from "redux";
