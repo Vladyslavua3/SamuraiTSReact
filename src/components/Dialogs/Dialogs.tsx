@@ -1,6 +1,6 @@
 import React from "react";
 import s from './Dialogs.module.css'
-import {NavLink} from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import {dialogsType, messageType} from "../../Store";
 import {ChangeEvent} from "react";
 import {DialogsPropsType} from "./DialogsContainer";
@@ -46,6 +46,10 @@ export const Dialogs = (props:DialogsPropsType) => {
             props.onChange(text)
         }
     }
+
+   if(!props.isAuth) return <Redirect to='/login'/>
+
+
 return(
     <div className={s.dialogs}>
         <div className={s.dialogsItems}>

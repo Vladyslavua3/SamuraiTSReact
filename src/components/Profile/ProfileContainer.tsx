@@ -1,16 +1,16 @@
 import React, {FC} from "react";
 import {Profile} from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
-import {getUserProfileTC, setUserProfile} from "../../redux/profileReducer";
+import {getUserProfileTC} from "../../redux/profileReducer";
 import {profilePageType, ProfileType} from "../../Store";
 import {AppStateType} from "../../redux/reduxStore";
 import {compose} from "redux";
-import {RouteComponentProps,withRouter} from "react-router-dom";
+import { Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 
 
 type MapStatePropsType = {
     profile: ProfileType
+    isAuth:boolean
 }
 
 type PathParamType = {
@@ -19,7 +19,7 @@ type PathParamType = {
 
 type ProfileTypeProps = profilePageType & { getUserProfileTC:(userId:string)=>void}
 
-type NewProfileTypeProps = ProfileTypeProps & RouteComponentProps<PathParamType>
+type NewProfileTypeProps = ProfileTypeProps & RouteComponentProps<PathParamType> & MapStatePropsType
 
 class ProfileContainer extends React.Component<NewProfileTypeProps>{
 
@@ -29,6 +29,8 @@ class ProfileContainer extends React.Component<NewProfileTypeProps>{
 
 
     render() {
+        if(!this.props.isAuth) return <Redirect to='/login'/>
+
         return (
             <div>
                 <Profile
@@ -45,7 +47,8 @@ class ProfileContainer extends React.Component<NewProfileTypeProps>{
 
 let mapStateToProps = (state:AppStateType):MapStatePropsType => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        isAuth:state.auth.isAuth
     }
 }
 

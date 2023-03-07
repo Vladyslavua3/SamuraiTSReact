@@ -10,7 +10,7 @@ export const Nav = () => {
             <NavLink to='/profile' >Profile</NavLink>
         </div>
         <div className={s.item}>
-            <NavLink to='/dialogs'>Messages</NavLink>
+            <NavLink to='/dialogs' >Messages</NavLink>
         </div>
         <div>
             <NavLink to='/news' >News</NavLink>
