@@ -17,7 +17,6 @@ export const getUsers = (currentPage:number,pageSize:number) => {
 export const unfollowUser = (id:number) => {
     return instance.delete(`/follow/${id}`)
         .then(response => {
-            console.log(response.data)
             return  response.data
         })
 
@@ -26,7 +25,6 @@ export const unfollowUser = (id:number) => {
 export const followUser = (id:number) => {
     return instance.post(`/follow/${id}`, {}, )
         .then(response => {
-            console.log(response.data)
            return  response.data
         })
 }
@@ -40,4 +38,19 @@ export const profileUsers = (userId:string) => {
 
 export const headerApi = () => {
     return instance.get(`/auth/me`).then(res => res.data)
+}
+
+
+export const profileApi = {
+  getProfile(userId:string){
+    return instance.get(`profile/${userId}`)
+      .then((res)=>res.data)
+  },
+  getStatus(userId:string){
+    return instance.get(`status/${userId}`)
+      .then((res)=>res.data)
+  },
+  updateStatus(status:string){
+    return instance.put(`status`,{status})
+  }
 }
