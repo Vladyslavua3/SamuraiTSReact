@@ -6,11 +6,10 @@ import {profilePageType} from "../../Store";
 
 
 
-
-export const Profile = (props:profilePageType) => {
+export const Profile = (props:profilePageType & {updateStatus:(status:string) => void}) => {
     return (
         <div>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
             <MyPostsContainer />
         </div>
     )

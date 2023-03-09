@@ -5,8 +5,10 @@ import s from "./ProfileInfo.module.css";
 import { ProfileStatus } from "./ProfileStatus/ProfileStatus";
 
 
-type ProfileInfoProps = {
+export type ProfileInfoProps = {
    profile:ProfileType
+  status:string
+  updateStatus:(status:string) => void
 }
 
 
@@ -22,7 +24,7 @@ export const ProfileInfo = (props:ProfileInfoProps) => {
                  <img className={s.user_photo}
                       src={props.profile.photos.small}
                  alt={'photo'}/>
-                 <ProfileStatus status={'lol'}/>
+                 <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
              </div>
         </div>
     )}

@@ -5,7 +5,7 @@ import {
     SetUsersACType, setUsersTotalCountACType, toggleIsFollowingACType,
     UnFollowACType
 } from "./redux/usersReducer";
-import {setUserProfileType} from "./redux/profileReducer";
+import { setStatusProfile, setUserProfileType } from "./redux/profileReducer";
 
 export type dialogsType = {
     id: string
@@ -26,6 +26,7 @@ export type messageType = {
 
 export type profilePageType = {
     newPostText:string
+    status:string
     postData: Array<postDataType>
     profile:ProfileType
 }
@@ -95,6 +96,7 @@ export type ActionsType =
     | setIsFetchingACType
     |setUserProfileType
     | toggleIsFollowingACType
+    | ReturnType<typeof setStatusProfile>
 
 // export type StoreType = {
 //     _state:stateType
