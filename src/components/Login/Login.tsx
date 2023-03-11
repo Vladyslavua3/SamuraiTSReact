@@ -2,23 +2,23 @@ import React from "react";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 
 
-interface FormData{
+type FormDataType ={
   login:string
   password:string
   rememberMe:boolean
 }
 
-export const LoginForm:React.FC<InjectedFormProps<FormData>> = (props) => {
+export const LoginForm:React.FC<InjectedFormProps<FormDataType>> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
-        <Field placeholder={'Login'} name={'login'} component={'input'}/>
+        <Field placeholder={'Login'} type={'email'} name={'login'} component={'input'}/>
       </div>
       <div>
-        <Field placeholder={'Password'} name={'password'} component={'input'}/>
+        <Field placeholder={'Password'} type={'password'} name={'password'} component={'input'}/>
       </div>
       <div>
-        <Field type={'checkbox'} name={'rememberMe'} component={'input'}/> remember me
+        <Field type={'checkbox'} name={'rememberMe'} component="input"/> remember me
       </div>
       <div>
         <button>Login</button>
@@ -27,11 +27,11 @@ export const LoginForm:React.FC<InjectedFormProps<FormData>> = (props) => {
   );
 };
 
-const LoginReduxForm = reduxForm<FormData>({form:'login'})(LoginForm)
+const LoginReduxForm = reduxForm<FormDataType>({form:'login'})(LoginForm)
 
 
-export const Login = () => {
-  const onSubmit = (formData:FormData) => {
+ const Login = () => {
+  const onSubmit = (formData:FormDataType) => {
     console.log(formData);
   }
 
@@ -42,3 +42,5 @@ export const Login = () => {
     </div>
   )
 }
+
+export default Login
