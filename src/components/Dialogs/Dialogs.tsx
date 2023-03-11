@@ -4,6 +4,7 @@ import { NavLink, Redirect } from "react-router-dom";
 import {dialogsType, messageType} from "../../Store";
 import {ChangeEvent} from "react";
 import {DialogsPropsType} from "./DialogsContainer";
+import { Field, InjectedFormProps, reduxForm } from "redux-form";
 
 const DialogItem = (props:dialogsType) => {
     return(
@@ -35,17 +36,9 @@ export const Dialogs = (props:DialogsPropsType) => {
     let messageElement = messages.map(el => <Message key={el.id} message={el.message} id={el.id}/>)
 
 
-    let addMessage = () => {
-        props.addMessage()
-        props.onChange('')
-    }
-
-    const onChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        if(e.currentTarget) {
-            const text = e.currentTarget.value
-            props.onChange(text)
-        }
-    }
+  let addNewMessage = (value:DialogsFormType) => {
+      props.addMessage(value.newMessageText)
+  }
 
 
 return(
@@ -56,10 +49,28 @@ return(
         <div className={s.messages}>
             {messageElement}
         </div>
-        <div>
-        <textarea  placeholder={'Enter your message'} onChange={onChange} value={props.messages.newMessageText}></textarea>
-        <button onClick={addMessage}>Send Message</button>
-        </div>
+        <AddMessageFormRedux onSubmit={addNewMessage}/>
     </div>
 )
 }
+
+type DialogsFormType = {
+  newMessageText:string
+}
+
+const AddMessageForm:React.FC<InjectedFormProps<DialogsFormType>> = (props) => {
+  return(
+    <form onSubmit={props.handleSubmit}>
+      <div>
+        <Field      component={'textarea'}
+                    name={'newMessageText'}
+                    type={'text'}
+                    placeholder={'Enter your message'}
+        ></Field>
+        <button>Send Message</button>
+      </div>
+    </form>
+  )
+}
+
+const AddMessageFormRedux = reduxForm<DialogsFormType>({form:'dialogAddMessageForm'})(AddMessageForm)

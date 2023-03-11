@@ -54,7 +54,6 @@ export type ProfileType = {
 }
 
 export type messagesType = {
-    newMessageText:string
     message: Array<messageType>
     dialogs:Array<dialogsType>
 }
@@ -75,6 +74,7 @@ export type UpdatePostACType = {
 
 export type addMessageACType = {
     type:'ADD-MESSAGE'
+    newMessageText:string
 }
 
 export type UpdateMessageACType = {
@@ -87,7 +87,6 @@ export type ActionsType =
     addPostACType
     | UpdatePostACType
     | addMessageACType
-    | UpdateMessageACType
     | UnFollowACType
     | FollowACType
     | SetUsersACType

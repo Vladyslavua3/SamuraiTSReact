@@ -12,24 +12,17 @@ type dialogsType = {
 
 
 type messagesType = {
-    newMessageText: string
     message: Array<messageType>
     dialogs: Array<dialogsType>
 }
 
 
-export const addMessageAC = (): ActionsType => ({type: 'ADD-MESSAGE'})
+export const addMessageAC = (newMessageText:string) => ({type: 'ADD-MESSAGE',newMessageText})
 
-export const updateNewMessageAC = (message: string) => {
-    return {
-        type: 'UPDATE-MESSAGE-TEXT',
-        message: message
-    } as const
-}
+
 
 
 const initialState: messagesType = {
-    newMessageText: '',
     message: [
         {
             id: 1,
@@ -77,20 +70,14 @@ export const messagesReducer = (state: messagesType = initialState, action: Acti
 
     switch (action.type) {
         case "ADD-MESSAGE":
-            let newText = state.newMessageText
+            let newText = action.newMessageText
             copyState = {
                 ...state,
                 message: [...state.message,
                     {id: state.message.length + 1, message: newText}
                 ]
             }
-            return {...copyState};
-        case "UPDATE-MESSAGE-TEXT":
-            copyState = {
-                ...state,
-                newMessageText: action.message
-            }
-            return {...copyState};
+            return copyState;
         default:
             return state
     }
