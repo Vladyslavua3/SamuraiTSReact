@@ -3,7 +3,7 @@ import s from './Dialogs.module.css'
 import { NavLink} from "react-router-dom";
 import {dialogsType, messageType} from "../../Store";
 import {DialogsPropsType} from "./DialogsContainer";
-import { Field, InjectedFormProps, reduxForm } from "redux-form";
+import { AddMessageFormRedux, DialogsFormType } from "./AddMessageForm/AddMessageForm";
 
 const DialogItem = (props:dialogsType) => {
     return(
@@ -52,24 +52,3 @@ return(
     </div>
 )
 }
-
-type DialogsFormType = {
-  newMessageText:string
-}
-
-const AddMessageForm:React.FC<InjectedFormProps<DialogsFormType>> = (props) => {
-  return(
-    <form onSubmit={props.handleSubmit}>
-      <div>
-        <Field      component={'textarea'}
-                    name={'newMessageText'}
-                    type={'text'}
-                    placeholder={'Enter your message'}
-        ></Field>
-        <button>Send Message</button>
-      </div>
-    </form>
-  )
-}
-
-const AddMessageFormRedux = reduxForm<DialogsFormType>({form:'dialogAddMessageForm'})(AddMessageForm)

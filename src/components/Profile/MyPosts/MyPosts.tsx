@@ -2,7 +2,7 @@ import React from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import {MyPostPropsType} from "./MyPostContainer";
-import { Field, InjectedFormProps, reduxForm } from "redux-form";
+import { AddNewPostFormRedux, AddNewPostType } from "./AddPostForm/AddPostForm";
 
 
 
@@ -30,18 +30,3 @@ export const MyPosts = (props:MyPostPropsType) => {
 }
 
 
-type AddNewPostType = {
-  newPostText:string
-}
-
-
-const AddNewPostForm:React.FC<InjectedFormProps<AddNewPostType>> = (props) => {
-  return(
-    <form onSubmit={props.handleSubmit}>
-      <Field component={'textarea'} name={'newPostText'} type={'text'} />
-      <button>Add Post</button>
-    </form>
-  )
-}
-
-const AddNewPostFormRedux = reduxForm<AddNewPostType>({form:'profileNewPostForm'})(AddNewPostForm)
