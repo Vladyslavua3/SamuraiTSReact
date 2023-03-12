@@ -12,7 +12,6 @@ import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 type MapStatePropsType = {
     profile: ProfileType
     status:string
-    newPostText:string
 }
 
 type PathParamType = {
@@ -49,7 +48,6 @@ class ProfileContainer extends React.Component<NewProfileTypeProps>{
               <Profile
                 {...this.props}
                 postData={this.props.postData}
-                newPostText={this.props.newPostText}
                 profile={this.props.profile}
                 status={this.props.status}
                 updateStatus={this.props.updateStatusProfileTC}
@@ -65,7 +63,6 @@ let mapStateToProps = (state:AppStateType):MapStatePropsType => {
     return {
         profile: state.profilePage.profile,
         status:state.profilePage.status,
-        newPostText:state.profilePage.newPostText
     }
 }
 

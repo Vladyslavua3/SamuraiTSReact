@@ -25,7 +25,6 @@ export type messageType = {
 }
 
 export type profilePageType = {
-    newPostText:string
     status:string
     postData: Array<postDataType>
     profile:ProfileType
@@ -65,6 +64,7 @@ export type stateType = {
 
 export type addPostACType = {
     type: 'ADD-POST'
+    newPostText:string
 }
 
 export type UpdatePostACType = {

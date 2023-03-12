@@ -5,14 +5,8 @@ import { profileApi, profileUsers } from "../api/api";
 export type setUserProfileType = ReturnType<typeof setUserProfile>
 
 
-export const addPostActionCreator = (): ActionsType => ({type: 'ADD-POST'})
+export const addPostActionCreator = (newPostText:string): ActionsType => ({type: 'ADD-POST',newPostText})
 
-export const updateNewPostTextActionCreator = (newText: string): ActionsType => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: newText
-    } as const
-}
 
 export const setUserProfile = (profile:ProfileType) => {
     return {
@@ -52,7 +46,6 @@ export const getUserProfileTC = (userId:string) =>{
 }
 
 const initialState: profilePageType = {
-    newPostText: '',
     status:'',
     postData: [
         {
@@ -94,7 +87,7 @@ const initialState: profilePageType = {
 export const profileReducer = (state: profilePageType = initialState, action: ActionsType) => {
     switch (action.type) {
         case "ADD-POST": {
-            let newPostText = state.newPostText
+            let newPostText = action.newPostText
 
             let stateCopy = {
                 ...state,
@@ -108,12 +101,6 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
 
             return stateCopy;
         }
-        case "UPDATE-NEW-POST-TEXT":
-            let stateCopy = {
-                ...state,
-                newPostText:action.newText
-            }
-            return stateCopy;
         case "SET-USERS-PROFILE":{
             return {...state,profile:action.profile}
         }
