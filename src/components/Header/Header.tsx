@@ -1,9 +1,10 @@
 import React from "react";
 import s from "./Header.module.css"
 import {NavLink} from "react-router-dom";
-import {initialStateType} from "../../redux/authReducer";
+import { headerContainerType } from "./HeaderContainer";
 
-export const Header = (props: initialStateType) => {
+
+export const Header = (props: headerContainerType) => {
     return (
         <header className={s.header}>
             <img
@@ -11,7 +12,7 @@ export const Header = (props: initialStateType) => {
                 alt='logo'/>
             <div className={s.loginBlock}>
                 {props.isAuth
-                    ? props.email
+                  ? <div>{props.email} - <button onClick={props.loginOutTC}>Logout</button></div>
                     : <NavLink to={'/login'}>Login</NavLink>}
             </div>
         </header>

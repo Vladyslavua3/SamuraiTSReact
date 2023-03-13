@@ -4,6 +4,8 @@ import { Input } from "../common/FormControls/FormsControls";
 import { maxLengthCreator, minLengthCreator, requiredField } from "../../utils/validators/validator";
 import { connect } from "react-redux";
 import { loginTC } from "../../redux/authReducer";
+import { Redirect } from "react-router-dom";
+import { AppStateType } from "../../redux/reduxStore";
 
 
 type FormDataType ={
@@ -11,6 +13,8 @@ type FormDataType ={
   password:string
   rememberMe:boolean
 }
+
+
 
 const maxLengthMail = maxLengthCreator(25);
 const minLengthMail = minLengthCreator(8);
@@ -52,10 +56,27 @@ export const LoginForm:React.FC<InjectedFormProps<FormDataType>> = (props) => {
 const LoginReduxForm = reduxForm<FormDataType>({form:'login'})(LoginForm)
 
 
+
+type MapStateToPropsType = {
+  isAuth: boolean
+  userId: number | null
+
+}
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+
+  return {
+    isAuth: state.auth.isAuth,
+    userId: state.auth.userId,
+  }
+}
+
  const Login = (props:any) => {
   const onSubmit = (formData:FormDataType) => {
     props.loginTC(formData.email,formData.password,formData.rememberMe)
   }
+
+
+  if(props.isAuth) return <Redirect to={'/profile'}/>
 
   return(
     <div>
@@ -65,4 +86,4 @@ const LoginReduxForm = reduxForm<FormDataType>({form:'login'})(LoginForm)
   )
 }
 
-export default connect(null,{loginTC})(Login)
+export default connect(mapStateToProps,{loginTC})(Login)
