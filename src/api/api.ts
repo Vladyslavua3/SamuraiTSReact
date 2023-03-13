@@ -36,9 +36,21 @@ export const profileUsers = (userId:string) => {
 }
 
 
-export const headerApi = () => {
+export const authApi =  {
+  me(){
     return instance.get(`/auth/me`).then(res => res.data)
+  },
+  login(email:string,password:string,rememberMe :boolean = false){
+    return instance.post('auth/login',{email,password,rememberMe})
+  },
+  loginOut(){
+    return instance.delete('auth/login')
+  }
 }
+
+
+
+
 
 
 export const profileApi = {

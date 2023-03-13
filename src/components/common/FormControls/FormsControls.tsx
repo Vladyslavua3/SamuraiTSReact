@@ -1,6 +1,8 @@
 import React from "react";
 import s from './FormsControls.module.css'
 
+
+
 type InputPropsType = {
   input: {
     name: string
