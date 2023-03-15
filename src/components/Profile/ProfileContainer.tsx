@@ -19,9 +19,9 @@ type PathParamType = {
 }
 
 type MapDispatchType = {
-    getUserProfileTC:(userId:string)=>void
-    getStatusProfileTC:(userId:string)=>void
-    updateStatusProfileTC:(status:string)=>void
+    getUserProfileTC:(userId:string) => void
+    getStatusProfileTC:(userId:string) => void
+    updateStatusProfileTC:(status:string) => void
 }
 
 type ProfileTypeProps = profilePageType & MapDispatchType
@@ -33,9 +33,6 @@ class ProfileContainer extends React.Component<NewProfileTypeProps>{
     componentDidMount() {
         let userId = this.props.match.params.userId
 
-        if(!userId){
-            userId = '27361'
-        }
         this.props.getUserProfileTC(userId)
         this.props.getStatusProfileTC(userId)
 
