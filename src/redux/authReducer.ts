@@ -1,4 +1,3 @@
-import React from "react";
 import {Dispatch} from "redux";
 import {authApi} from "../api/api";
 import { stopSubmit } from "redux-form";
@@ -76,15 +75,13 @@ const resetAuthDataAC = () => {
     return {type: RESET_USER_AUTH_DATA}
 }
 
-export const getAuthUserDataTC = () => {
-    return (dispatch:Dispatch) => {
-        authApi.me().then(res => {
+export const getAuthUserDataTC = () => (dispatch:Dispatch) => {
+    return  authApi.me().then(res => {
             if(res.resultCode === 0){
                 const {id,email,login} = res.data;
                 dispatch(setAuthUserData(id,email,login))
             }
         })
-    }
 }
 
 
