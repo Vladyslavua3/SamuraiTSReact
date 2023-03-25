@@ -7,6 +7,7 @@ import { loginTC } from "../../redux/authReducer";
 import { Redirect } from "react-router-dom";
 import { AppStateType } from "../../redux/reduxStore";
 import style from '../common/FormControls/FormsControls.module.css'
+import { getUserAuth, getUserId } from "../../redux/selectors/authSelector";
 
 
 type FormDataType ={
@@ -71,8 +72,8 @@ type MapStateToPropsType = {
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
   return {
-    isAuth: state.auth.isAuth,
-    userId: state.auth.userId,
+    isAuth: getUserAuth(state),
+    userId: getUserId(state),
   }
 }
 

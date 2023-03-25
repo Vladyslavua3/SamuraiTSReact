@@ -2,6 +2,7 @@ import React, {ComponentType} from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { AppStateType } from "../redux/reduxStore";
+import { getUserAuth } from "../redux/selectors/authSelector";
 
 type MapStatePropsType = {
   isAuth: boolean;
@@ -9,7 +10,7 @@ type MapStatePropsType = {
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
   return {
-    isAuth: state.auth.isAuth
+    isAuth: getUserAuth(state)
   };
 };
 
